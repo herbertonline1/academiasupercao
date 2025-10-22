@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Academia Superação - Supere Seus Limites</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
+
+    <style>
+         /* Contato & Footer styles */
+        .contato{
+            background: linear-gradient(180deg, rgba(8,8,8,0.6), rgba(6,6,6,0.5));
+            border-top:1px solid rgba(126,240,139,0.03);
+            border-bottom:1px solid rgba(126,240,139,0.02);
+            padding:84px 0;
+        }
+        .contato .container{max-width:980px}
+
+        /* Form */
+        #contactForm{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+            margin:18px auto 0;
+            max-width:720px;
+        }
+        .input{
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(126,240,139,0.06);
+            padding:12px 14px;
+            border-radius:10px;
+            color:inherit;
+            font-size:1rem;
+            transition:box-shadow .18s, border-color .18s, transform .12s;
+            resize:vertical;
+        }
+        .input::placeholder{color:rgba(230,247,234,0.45)}
+        .input:focus{
+            outline:none;
+            border-color:#7ef08b;
+            box-shadow:0 8px 30px rgba(126,240,139,0.06);
+            transform:translateY(-2px);
+        }
+
+        .btn-submit{
+            display:inline-block;
+            background:linear-gradient(90deg,#7ef08b,#28a745);
+            color:#041007;
+            padding:12px 20px;
+            border-radius:999px;
+            font-weight:800;
+            border:none;
+            cursor:pointer;
+            box-shadow:0 10px 30px rgba(40,167,69,0.12);
+            transition:transform .18s, box-shadow .18s, opacity .18s;
+            /* align-self:flex-start; */
+        }
+        .btn-submit:hover{
+            transform:translateY(-4px);
+            box-shadow:0 18px 60px rgba(40,167,69,0.22);
+            opacity:0.98;
+        }
+
+        /* Footer */
+        footer{
+            padding:28px 0;
+            background:linear-gradient(180deg,#020202,#020202);
+            text-align:center;
+            border-top:1px solid rgba(126,240,139,0.03);
+        }
+        footer .container{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:8px;
+        }
+        footer .socials{
+            display:flex;
+            gap:8px;
+            align-items:center;
+            justify-content:center;
+            margin-top:6px;
+        }
+        footer .socials a{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:44px;
+            height:44px;
+            border-radius:10px;
+            background:rgba(126,240,139,0.03);
+            border:1px solid rgba(126,240,139,0.06);
+            color:#7ef08b;
+            transition:transform .15s, background .15s, box-shadow .15s;
+        }
+        footer .socials a:hover{
+            transform:translateY(-4px);
+            background:linear-gradient(90deg,#7ef08b22,#28a74522);
+            box-shadow:0 12px 36px rgba(46,125,50,0.12);
+        }
+        footer .socials svg{
+            width:18px;
+            height:18px;
+            fill:currentColor;
+            display:block;
+        }
+        @media (max-width:700px){
+            .contato{padding:56px 0}
+            #contactForm{padding:0 12px; gap:10px}
+            .btn-submit{width:100%; text-align:center; align-self:stretch}
+            footer .container{padding:0 18px}
+        }
+             /* Estilo específico para a seção Planos */
+        .planos{
+            background: linear-gradient(180deg, rgba(11,11,11,0.6), rgba(4,6,4,0.4));
+            border-top:1px solid rgba(126,240,139,0.04);
+            border-bottom:1px solid rgba(126,240,139,0.03);
+            padding:84px 0;
+        }
+        .planos .container{max-width:1100px}
+
+        .planos-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+            gap:20px;
+            margin-top:26px;
+        }
+
+        .plano-card{
+            background: linear-gradient(180deg, rgba(12,12,12,0.55), rgba(6,6,6,0.65));
+            padding:22px;
+            border-radius:14px;
+            border:1px solid rgba(126,240,139,0.04);
+            box-shadow:0 10px 30px rgba(0,0,0,0.55);
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+            transition:transform .22s, box-shadow .22s;
+        }
+        .plano-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 20px 60px rgba(0,0,0,0.7);
+        }
+
+        .plano-card h3{
+            color:#e6f7ea;
+            font-size:1.15rem;
+            margin-bottom:2px;
+            font-weight:800;
+        }
+
+        .preco{
+            color:linear-gradient; /* fallback for clarity below */
+            color:#7ef08b;
+            font-weight:900;
+            font-size:1.5rem;
+            display:inline-block;
+            margin-bottom:8px;
+        }
+
+        .plano-card ul{
+            list-style:none;
+            padding-left:0;
+            margin:8px 0 14px 0;
+            color:rgba(230,247,234,0.9);
+            line-height:1.5;
+            font-size:0.98rem;
+        }
+        .plano-card ul li{
+            position:relative;
+            padding-left:22px;
+            margin-bottom:8px;
+        }
+        .plano-card ul li::before{
+            content:"✓";
+            position:absolute;
+            left:0;
+            top:0;
+            color:#7ef08b;
+            font-weight:800;
+            font-size:0.95rem;
+            line-height:1;
+        }
+
+        .cta-button-plano{
+            display:inline-block;
+            margin-top:auto;
+            background:linear-gradient(90deg,#7ef08b,#28a745);
+            color:#041007;
+            padding:10px 18px;
+            border-radius:999px;
+            font-weight:800;
+            text-decoration:none;
+            box-shadow:0 10px 30px rgba(40,167,69,0.12);
+            transition:transform .18s, box-shadow .18s, opacity .18s;
+        }
+        .cta-button-plano:hover{
+            transform:translateY(-4px);
+            box-shadow:0 18px 60px rgba(40,167,69,0.22);
+            opacity:0.98;
+        }
+
+        /* Responsivo */
+        @media (max-width:700px){
+            .planos{padding:56px 0}
+            .plano-card{padding:16px}
+            .preco{font-size:1.25rem}
+        }
+        /* ---------- Reset & Base ---------- */
+        *{box-sizing:border-box;margin:0;padding:0}
+        html,body{height:100%}
+        body{
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(180deg,#080808 0%, #0f0f0f 60%);
+            color:#e6f7ea;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            overflow-x:hidden;
+            line-height:1.45;
+        }
+        a{color:inherit;text-decoration:none}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+        /* ---------- Header ---------- */
+        header{
+            position:fixed;left:0;right:0;top:0;
+            background:rgba(6,6,6,0.55);
+            backdrop-filter: blur(6px);
+            z-index:1200;
+            box-shadow:0 6px 18px rgba(0,0,0,0.6);
+        }
+        nav.container{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+        .logo{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:2px}
+        .logo img{height:44px}
+        .brand-name{color:#7ef08b;font-size:1.2rem;text-transform:uppercase}
+        .nav-links{display:flex;gap:18px;list-style:none;transition:max-height .3s ease-in-out;}
+        .nav-links a{padding:8px 14px;border-radius:30px;font-weight:600;transition:transform .18s, background .18s}
+        .nav-links a:hover{transform:translateY(-3px);background:rgba(126,240,139,0.06);}
+
+        .hamburger{
+            display:none;
+            cursor:pointer;
+            flex-direction:column;
+            position:relative;
+            transform:translateX(-20px); /* move um pouco para a esquerda */
+        }
+        .hamburger span{display:block;width:28px;height:3px;background:#7ef08b;margin:5px 0;border-radius:3px;transition:.3s}
+
+        /* Hamburger Animation */
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        @media (max-width:700px){
+            .nav-links{
+                position:absolute;
+                top:72px;
+                left:0;
+                right:0;
+                background:#0b0b0b;
+                flex-direction:column;
+                align-items:center;
+                overflow:hidden;
+                max-height:0;
+            }
+            .nav-links.active{max-height:340px;}
+            .hamburger{display:flex;}
+        }
+
+        /* ---------- Hero ---------- */
+        .hero{
+            position:relative;height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:80px;
+            overflow:hidden;
+        }
+        .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.35) saturate(.95);z-index:-2}
+        .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(125deg, rgba(126,240,139,0.08), rgba(0,0,0,0.6));z-index:-1}
+        .hero-content{max-width:900px;padding:40px;border-radius:18px}
+        .hero h1{font-size:3.2rem;margin-bottom:10px;color:#ffffff;text-shadow:0 8px 40px rgba(0,0,0,0.6);letter-spacing:1px}
+        .hero p{font-size:1.1rem;margin-bottom:22px;color:rgba(230,247,234,.92)}
+        .cta-button{
+            display:inline-block;background:linear-gradient(90deg,#7ef08b,#28a745);color:#041007;padding:14px 28px;border-radius:60px;font-weight:800;
+            box-shadow:0 12px 40px rgba(40,167,69,0.14);transition:transform .18s, box-shadow .18s;
+        }
+        .cta-button:hover{transform:translateY(-4px);box-shadow:0 18px 60px rgba(40,167,69,0.28);}
+
+        /* ---------- Sections ---------- */
+        section{padding:84px 0}
+        h2{color:#7ef08b;font-size:2rem;margin-bottom:22px;text-align:center;font-weight:800;letter-spacing:1px}
+
+        /* ---------- Sobre ---------- */
+        .sobre{background:linear-gradient(90deg,#0b0b0b 0%, #071007 100%);border-top:1px solid rgba(126,240,139,0.04);border-bottom:1px solid rgba(126,240,139,0.04)}
+        .sobre-content{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+        .sobre-text p{color:rgba(230,247,234,.9);font-size:1.03rem;margin-bottom:10px}
+        .sobre-image{height:320px;border-radius:12px;background:center/cover no-repeat #111;display:flex;align-items:flex-end;justify-content:flex-end;padding:16px;font-weight:700;box-shadow:0 12px 36px rgba(0,0,0,0.6)}
+
+        /* ---------- Cards (Unidades e Aulas) ---------- */
+        .grid{display:grid;gap:20px}
+        .unidades-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+        .card{
+            background:linear-gradient(180deg, rgba(12,12,12,0.6), rgba(6,6,6,0.65));
+            padding:20px;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.6);transition:transform .28s, box-shadow .28s;
+            border:1px solid rgba(126,240,139,0.03)
+        }
+        .card:hover{transform:translateY(-8px);box-shadow:0 18px 60px rgba(0,0,0,0.75)}
+        .card h3{color:#e6f7ea;margin-bottom:6px}
+        .card p{color:rgba(230,247,234,0.85)}
+
+        /* ---------- Carousel ---------- */
+        .carousel{
+            position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(126,240,139,0.06);
+            box-shadow:0 18px 50px rgba(0,0,0,0.6)
+        }
+        .carousel-track{display:flex;transition:transform .6s ease;will-change:transform}
+        .carousel-slide{min-width:100%;user-select:none}
+        .carousel-slide img{width:100%;height:420px;object-fit:cover;display:block}
+        .carousel-controls{position:absolute;left:10px;right:10px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;pointer-events:none}
+        .btn-ghost{background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);padding:10px;border-radius:50%;pointer-events:auto;border:1px solid rgba(126,240,139,0.12);cursor:pointer}
+        .carousel-dots{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:8px}
+        .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.12);cursor:pointer;border:1px solid rgba(126,240,139,0.06)}
+        .dot.active{background:linear-gradient(90deg,#7ef08b,#28a745);box-shadow:0 6px 18px rgba(40,167,69,0.12)}
+
+        footer{padding:28px 0;background:linear-gradient(180deg,#020202,#020202);text-align:center;border-top:1px solid rgba(126,240,139,0.03)}
+
+
+
+
+        
+             .sobre-image {
+            background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+            height: 320px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(40,167,69,0.3);
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 1rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px #000;
+        }
+
+        /* Scroll Reveal Styles */
+        [data-sr] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        [data-sr].reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="container">
+        <div class="logo">
+            <img src="Adobe Express - file.png" alt="Logo" onerror="this.style.display='none'">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#unidades">Unidades</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+</header>
+
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <video autoplay loop muted playsinline>
+            <source src="3196220-uhd_3840_2160_25fps.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo como background.
+        </video>
+        <div class="hero-content container" data-sr>
+            <h1>Supere Seus Limites</h1>
+            <p>Transforme sua vida na Academia Superação. Estrutura moderna, equipamentos de ponta e equipe qualificada.</p>
+            <!-- WhatsApp fictício -->
+                       <a class="cta-button" href="https://wa.me/5591999999999?text=Olá!+Quero+saber+mais+sobre+os+planos+da+Academia+Superação" target="_blank" rel="noopener">Matricule-se Agora</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="sobre">
+        <div class="container" data-sr>
+            <h2>Sobre a Superação</h2>
+            <div class="sobre-content">
+                <div class="sobre-text">
+                    <p>A Academia Superação é o seu parceiro para uma vida saudável e ativa. Com 4 unidades estrategicamente localizadas, oferecemos equipamentos de ponta, treinadores qualificados e uma variedade de aulas para todos os níveis.</p>
+                    <p>Junte-se a uma comunidade motivada e supere seus desafios diários!</p>
+                </div>
+
+                <div class="sobre-image-wrapper">
+                    <img src="assets/sobre.jpg" alt="Estrutura da Academia Superação" class="sobre-image">
+                    <div class="sobre-badge">Estrutura moderna | Treinadores</div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            /* Responsividade e alinhamento específico para a seção "Sobre" */
+            .sobre-content{
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:28px;
+                align-items:center;
+            }
+            .sobre-text p{
+                color:rgba(230,247,234,.9);
+                font-size:1.03rem;
+                margin-bottom:10px;
+            }
+
+            .sobre-image-wrapper{
+                position:relative;
+                border-radius:12px;
+                overflow:hidden;
+                box-shadow:0 12px 36px rgba(0,0,0,0.6);
+                background:#111;
+            }
+            .sobre-image{
+                display:block;
+                width:100%;
+                height:100%;
+                min-height:320px;
+                object-fit:cover;
+            }
+            .sobre-badge{
+                position:absolute;
+                left:16px;
+                bottom:16px;
+                padding:10px 12px;
+                background:rgba(0,0,0,0.38);
+                border-radius:8px;
+                font-weight:700;
+                color:#e6f7ea;
+                font-size:0.95rem;
+                backdrop-filter: blur(4px);
+            }
+
+            /* Quebra para telas médias e pequenas */
+            @media (max-width:900px){
+                .sobre-content{
+                    grid-template-columns:1fr;
+                    gap:18px;
+                    text-align:center;
+                }
+                .sobre-text p{font-size:1rem}
+                .sobre-badge{
+                    left:50%;
+                    transform:translateX(-50%);
+                    bottom:12px;
+                }
+                .sobre-image{min-height:260px}
+            }
+
+            @media (max-width:480px){
+                .sobre-image{min-height:200px}
+                .sobre-text p{font-size:0.98rem}
+                .sobre-badge{font-size:0.9rem;padding:8px 10px}
+            }
+        </style>
+    </section>
+
+<section id="unidades">
+    <div class="container" data-sr>
+        <h2>Nossas 4 Unidades</h2>
+        <div class="unidades-grid grid">
+            <a href="unidade1.html" class="card unidade-card"><h3>Unidade 1 - Centro</h3><p>Rua Exemplo, 123 - Centro<br>Horário: 6h às 22h</p></a>
+            <a href="unidade2.html" class="card unidade-card"><h3>Unidade 2 - Norte</h3><p>Av. Norte, 456 - Norte<br>Horário: 5h às 23h</p></a>
+            <a href="unidade3.html" class="card unidade-card"><h3>Unidade 3 - Sul</h3><p>Rua Sul, 789 - Sul<br>Horário: 6h às 22h</p></a>
+            <a href="unidade4.html" class="card unidade-card"><h3>Unidade 4 - Leste</h3><p>Av. Leste, 101 - Leste<br>Horário: 6h às 22h</p></a>
+        </div>
+    </div>
+</section>
+
+<section id="galeria">
+    <div class="container" data-sr>
+        <h2>Galeria</h2>
+        <div class="carousel" id="carousel">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide"><img src="Treino1.jpg" alt=""></div>
+                <div class="carousel-slide"><img src="treino2.jpg" alt=""></div>
+                <div class="carousel-slide"><img src="treino3.jpg" alt=""></div>
+            </div>
+            <div class="carousel-controls">
+                <button class="btn-ghost" id="prevBtn">&lt;</button>
+                <button class="btn-ghost" id="nextBtn">&gt;</button>
+            </div>
+            <div class="carousel-dots" id="dots"></div>
+        </div>
+    </div>
+</section>
+
+  <!-- Planos -->
+    <section id="planos" class="planos">
+        <div class="container" data-sr>
+            <h2>Nossos Planos e Pacotes</h2>
+            <div class="planos-grid">
+                <div class="plano-card">
+                    <h3>Plano Essencial</h3>
+                    <span class="preco">R$ 89,90 <span style="font-size:.7rem;font-weight:600">/mês</span></span>
+                    <ul>
+                        <li>Acesso ilimitado à musculação</li>
+                        <li>Acesso a todas as unidades</li>
+                        <li>Avaliação física inicial</li>
+                    </ul>
+                    <a class="cta-button-plano" href="https://wa.me/5591999999999?text=Olá!+Quero+contratar+o+Plano+Essencial" target="_blank">Escolher Plano</a>
+                </div>
+
+                <div class="plano-card">
+                    <h3>Plano Premium</h3>
+                    <span class="preco">R$ 129,90 <span style="font-size:.7rem;font-weight:600">/mês</span></span>
+                    <ul>
+                        <li>Tudo do Plano Essencial</li>
+                        <li>Acesso às aulas coletivas</li>
+                        <li>Desconto em personal</li>
+                    </ul>
+                    <a class="cta-button-plano" href="https://wa.me/5591999999999?text=Olá!+Quero+contratar+o+Plano+Premium" target="_blank">Escolher Plano</a>
+                </div>
+
+                <div class="plano-card">
+                    <h3>Plano Anual</h3>
+                    <span class="preco">R$ 999,00 <span style="font-size:.7rem;font-weight:600">/ano</span></span>
+                    <ul>
+                        <li>Tudo do Premium</li>
+                        <li>Economia de 30%</li>
+                        <li>1 mês grátis de personal</li>
+                    </ul>
+                    <a class="cta-button-plano" href="https://wa.me/5591999999999?text=Olá!+Quero+contratar+o+Plano+Anual" target="_blank">Escolher Plano</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="contato">
+        <div class="container" data-sr>
+            <h2>Entre em Contato</h2>
+            <form id="contactForm">
+                <input class="input" type="text" placeholder="Seu Nome" required>
+                <input class="input" type="email" placeholder="Seu Email" required>
+                <textarea class="input" rows="5" placeholder="Sua Mensagem" required></textarea>
+                <button type="submit" class="btn-submit">Enviar</button>
+            </form>
+            <p style="margin-top:16px;color:rgba(230,247,234,.7);text-align:center">Ou ligue: (11) 99999-9999 | Email: contato@superacao.com.br</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="font-weight:700">© <span id="year"></span> Academia Superação — Todos os direitos reservados.</div>
+            <div style="margin-top:6px;color:rgba(230,247,234,.6)">Siga-nos</div>
+            <div class="socials" style="margin-top:10px">
+                <a href="https://www.instagram.com/academiaasuperacao" target="_blank" aria-label="Instagram">
+                    <!-- Instagram SVG -->
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm6.5-.7a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
+                </a>
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                    <!-- Facebook SVG -->
+                    <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.1V12h2.1V9.8c0-2.1 1.2-3.3 3-3.3.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.2V12h2.2l-.35 2.9H14v7A10 10 0 0 0 22 12z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok">
+                    <!-- TikTok SVG (simple) -->
+                    <svg viewBox="0 0 24 24"><path d="M9 3v12.5A4.5 4.5 0 1 0 13.5 20V9h3V6H13.5V3H9z"/></svg>
+                </a>
+                <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+                    <!-- YouTube SVG -->
+                    <svg viewBox="0 0 24 24"><path d="M23 7s-.2-1.6-.8-2.3c-.7-.9-1.5-.9-1.9-1C17.8 3 12 3 12 3s-5.8 0-8.3.7c-.4.1-1.2.1-1.9 1C1.2 5.4 1 7 1 7S1 8.9 1 10.8v2.4C1 15.1 1.2 17 1.2 17s.2 1.6.8 2.3c.7.9 1.6.9 2 1 1.5.5 8 .7 8 .7s5.8 0 8.3-.7c.4-.1 1.2-.1 1.9-1 .6-.7.8-2.3.8-2.3s.2-1.9.2-3.8v-2.4C23.2 8.9 23 7 23 7z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    document.getElementById("year").innerText = new Date().getFullYear();
+
+    // Hamburger Menu Toggle with Animation
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        hamburger.classList.toggle("open");
+    });
+
+    // Carousel Functionality
+    (function(){
+        const track = document.getElementById('carouselTrack');
+        const slides = Array.from(track.children);
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsNav = document.getElementById('dots');
+        let index = 0;
+        let interval;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => { goTo(i); reset(); });
+            dotsNav.appendChild(dot);
+        });
+
+        function update() {
+            track.style.transform = 'translateX(' + (-index * 100) + '%)';
+            [...dotsNav.children].forEach((d, i) => d.classList.toggle('active', i === index));
+        }
+
+        function goTo(i) {
+            index = (i + slides.length) % slides.length;
+            update();
+        }
+
+        prevBtn.onclick = () => { goTo(index - 1); reset(); };
+        nextBtn.onclick = () => { goTo(index + 1); reset(); };
+
+        function auto() { interval = setInterval(() => goTo(index + 1), 4000); }
+        function stop() { clearInterval(interval); }
+        function reset() { stop(); auto(); }
+
+        document.getElementById('carousel').addEventListener('mouseenter', stop);
+        document.getElementById('carousel').addEventListener('mouseleave', auto);
+        update();
+        auto();
+    })();
+
+    // Scroll Reveal Functionality
+    function revealOnScroll() {
+        const elements = document.querySelectorAll('[data-sr]');
+        const windowHeight = window.innerHeight;
+
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const revealPoint = 150; // Adjust this value to control when the reveal happens
+
+            if (elementTop < windowHeight - revealPoint) {
+                element.classList.add('reveal');
+            }
+        });
+    }
+
+    // Initial check and event listener
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Check on page load
+</script>
+</body>
+</html>
